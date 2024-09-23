@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 
 const dashboard = async(req,res)=>{
   try{
+    console.log(req.user)
     const findUser= await User.findById(req.user.id).populate('loan')
     if(!findUser){
       console.log('Could not find user')
