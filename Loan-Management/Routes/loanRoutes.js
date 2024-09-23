@@ -13,9 +13,9 @@ const {
         getUserRepayments
 } = require("../Controllers/loanController");
 loanRouter.get('/user/dashboard',dashboard)
-loanRouter.get('/user/all-loans',userAccessAuth,viewLoans)
+loanRouter.get('/user/all-loans',viewLoans)
 //loanRouter.get('/apply',checkProfileComplete)
-loanRouter.post("/apply", userAccessAuth, applyForLoan);
+loanRouter.post("/apply", applyForLoan);
 loanRouter.get(
         "/borrower/approvedLoans",
         userAccessAuth,
