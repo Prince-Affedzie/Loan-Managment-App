@@ -13,7 +13,11 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({
+  origin: 'https://loan-managment-frontend.vercel.app/', // Replace with your actual Vercel frontend URL
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true
+}))
 
 app.use(express.static(path.join(__dirname, 'Loan-Management-frontend/build')));
 
