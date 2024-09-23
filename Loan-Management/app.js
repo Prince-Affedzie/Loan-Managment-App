@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const path = require('path')
 const cors = require('cors')
 const authRoutes = require('./Routes/authRoutes');
 const adminRoutes = require('./Routes/adminRoutes')
@@ -28,3 +29,6 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes)
 app.use('/api/loan', loanRoutes)
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'Loan-Managment-frontend/build'))
+})
