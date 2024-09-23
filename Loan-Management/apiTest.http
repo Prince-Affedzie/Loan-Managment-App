@@ -1,0 +1,7 @@
+GET http://localhost:3000/api/loan/user/all-loans
+Content-Type: application/json
+
+{
+  "email":"Oheneba@gmail.com",
+  "password":"nana2323"
+}
