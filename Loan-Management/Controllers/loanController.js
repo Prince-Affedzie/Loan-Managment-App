@@ -171,6 +171,9 @@ const getBorrowerLoans = async (req, res) => {
 //When a user wants to view his or her loans
 const viewLoans = async (req, res) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ message: 'User not authenticated' });
+  }
     const loans = await Loan.find({ borrower: req.user.id }).populate('repaymentSchedule').sort({'createdDate':-1});
     res.status(200).json(loans)
   } catch (err) {
