@@ -13,7 +13,7 @@ const dashboard = async(req,res)=>{
     return res.status(401).json({message:'No token provided'})
   }
   try{
-    const decoded=  jwt.verify(token,process.env.JWT_SECRET);
+    const decoded = jwt.verify(token,process.env.JWT_SECRET);
     req.user = decoded
      
   }catch(err){
