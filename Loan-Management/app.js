@@ -30,5 +30,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes)
 app.use('/api/loan', loanRoutes)
 app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname,'Loan-Managment-frontend/build'))
+  res.sendFile(express.static(path.join(__dirname,'Loan-Managment-frontend/build')))
 })
