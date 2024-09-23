@@ -14,9 +14,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors({
-  origin: 'http://localhost:3001', // Frontend URL
+  origin: 'https://loan-managment-app-frontend.onrender.com', // Frontend URL
   credentials: true, // Allow credentials (cookies) to be sent
 }));
+app.use(express.static(path.join(__dirname, 'Loan-Management-frontend/build')));
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -30,5 +32,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes)
 app.use('/api/loan', loanRoutes)
 app.get('*',(req,res)=>{
-  res.sendFile(express.static(path.join(__dirname,'Loan-Managment-frontend/build')))
+  res.sendFile(path.join(__dirname,'Loan-Managment-frontend/build', 'index.html'))
 })
