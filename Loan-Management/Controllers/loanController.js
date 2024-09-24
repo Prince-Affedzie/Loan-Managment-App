@@ -7,9 +7,15 @@ const jwt = require('jsonwebtoken')
 
 
 const dashboard = async(req,res)=>{
+   const token = req.cookies.token
+   if(!token){
+    return res.redirect('/')
+   }
+  
   try{
+    const user = jwt.verify(token,process.env.JWT_SECFRET)
     console.log(req.user)
-    const findUser= await User.findById(req.user.id).populate('loan')
+    const findUser= await User.findById(user.id).populate('loan')
     if(!findUser){
       console.log('Could not find user')
       return res.status(404).json({message:'Could not find user'})
