@@ -7,15 +7,11 @@ const jwt = require('jsonwebtoken')
 
 
 const dashboard = async(req,res)=>{
-   const token = req.cookies.token
-   if(!token){
-    return res.redirect('/')
-   }
   
   try{
-    const user = jwt.verify(token,process.env.JWT_SECFRET)
-    req.user = user
-    const findUser= await User.findById(user.id).populate('loan')
+    //const user = jwt.verify(token,process.env.JWT_SECFRET)
+   const user = req.user
+    const findUser= await User.findById(user._id).populate('loan')
     if(!findUser){
       console.log('Could not find user')
       return res.status(404).json({message:'Could not find user'})
@@ -177,7 +173,7 @@ const getBorrowerLoans = async (req, res) => {
 //When a user wants to view his or her loans
 const viewLoans = async (req, res) => {
  try{
-  const loans = await Loan.find({ borrower:req.user.id }).populate('repaymentSchedule').sort({'createdDate':-1});
+  const loans = await Loan.find({ borrower:req.user._id }).populate('repaymentSchedule').sort({'createdDate':-1});
     res.status(200).json(loans)
   } catch (err) {
     console.log(err);
