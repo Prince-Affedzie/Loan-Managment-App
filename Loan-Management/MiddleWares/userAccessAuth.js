@@ -3,7 +3,10 @@ const cookieParser = require('cookie-parser');
 
 
 const userAccessAuth = (req, res, next) =>{
-  const token = req.cookies.token;
+  console.log('Cookies received:', req.cookies);
+  console.log('Headers received:', req.headers);
+  const token = req.cookies.token || req.headers['authorization'];
+  console.log('Token extracted:', token);
   console.log(token)
   if(!token){
     return res.status(401).json({message:'No token provided'})
