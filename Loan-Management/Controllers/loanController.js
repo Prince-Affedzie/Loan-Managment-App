@@ -14,7 +14,7 @@ const dashboard = async(req,res)=>{
   
   try{
     const user = jwt.verify(token,process.env.JWT_SECFRET)
-    console.log(req.user)
+    req.user = user
     const findUser= await User.findById(user.id).populate('loan')
     if(!findUser){
       console.log('Could not find user')
@@ -176,11 +176,8 @@ const getBorrowerLoans = async (req, res) => {
 };
 //When a user wants to view his or her loans
 const viewLoans = async (req, res) => {
-  try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'User not authenticated' });
-  }
-    const loans = await Loan.find({ borrower: req.user.id }).populate('repaymentSchedule').sort({'createdDate':-1});
+ try{
+  const loans = await Loan.find({ borrower:req.user.id }).populate('repaymentSchedule').sort({'createdDate':-1});
     res.status(200).json(loans)
   } catch (err) {
     console.log(err);
