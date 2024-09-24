@@ -19,7 +19,8 @@ const loginUser = async(req,res)=>{
   }
     req.user = user
     const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
-    res.cookie('token',token,{httpOnly:true,secure:true,sameSite:'strict', maxAge: 3600000})
+    res.cookie('token',token,{httpOnly:true,secure:true,sameSite:'none', maxAge: 3600000})
+    console.log('Cookie set. Response headers:', res.getHeaders());
     console.log(user,token)
     res.status(200).json({message:'Login successful',user})
    
