@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const CookieParser = require('cookie-parser')
 const path = require('path')
 const cors = require('cors')
 const authRoutes = require('./Routes/authRoutes');
@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cookieParser())
+app.use(CookieParser())
 app.use(cors({
   origin: 'https://loan-managment-frontend.vercel.app', // Replace with your actual Vercel frontend URL
   methods: 'GET,POST,PUT,DELETE',
