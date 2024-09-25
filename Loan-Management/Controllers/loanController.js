@@ -10,15 +10,14 @@ const dashboard = async(req,res)=>{
   
   try{
     //const user = jwt.verify(token,process.env.JWT_SECFRET)
-   console.log(req.user._id)
+  
     const findUser= await User.findById(req.user.id).populate('loan')
     if(!findUser){
       console.log('Could not find user')
       return res.status(404).json({message:'Could not find user'})
     }
     res.status(200).json(findUser)
-    console.log(findUser)
-
+   
 
   }catch(err){
     res.status(500).send('Internal Server Error')
