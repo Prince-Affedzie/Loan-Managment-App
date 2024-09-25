@@ -53,7 +53,7 @@ const registerUser = async(req,res)=>{
     const token = jwt.sign({id:savedUser._id,phoneNumber:savedUser.phoneNumber},process.env.JWT_SECRET,{expiresIn:'1h'});
     res.cookie('token',token,{httpOnly:true,secure:true,sameSite:'none', maxAge: 3600000})
     res.status(201).json({message:'User registered successfully',token})
-    console.log(savedUser)
+   
     //res.status(200).redirect('/dashboard')
   }catch(err){
     console.log(err)

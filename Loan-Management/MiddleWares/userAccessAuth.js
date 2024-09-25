@@ -3,18 +3,13 @@ const cookieParser = require('cookie-parser');
 
 
 const userAccessAuth = (req, res, next) =>{
-  console.log('Cookies received:', req.cookies);
-  console.log('Headers received:', req.headers);
   const token = req.cookies.token || req.headers['authorization'];
-  console.log('Token extracted:', token);
-  console.log(token)
   if(!token){
     return res.status(401).json({message:'No token provided'})
   }
   try{
     const decoded=  jwt.verify(token,process.env.JWT_SECRET);
-    console.log('Decoded Token:', decoded);
-
+   
     req.user = decoded
      next();
   }catch(err){
