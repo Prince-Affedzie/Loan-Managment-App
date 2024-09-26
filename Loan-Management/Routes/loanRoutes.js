@@ -15,7 +15,7 @@ const {
 loanRouter.get('/user/dashboard',userAccessAuth,dashboard)
 loanRouter.get('/user/all-loans',userAccessAuth,viewLoans)
 //loanRouter.get('/apply',checkProfileComplete)
-loanRouter.post("/apply", applyForLoan);
+loanRouter.post("/apply",userAccessAuth, applyForLoan);
 loanRouter.get(
         "/borrower/approvedLoans",
         userAccessAuth,
