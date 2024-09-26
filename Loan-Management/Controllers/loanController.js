@@ -44,8 +44,8 @@ const applyForLoan = async (req, res) => {
       purpose
     });
     const savedLoan = await loan.save();
-    const userPhoneNumber = req.user.phoneNumber
-    sendSms( userPhoneNumber,'Your Loan Application has been submitted Succesfully')
+    //const userPhoneNumber = req.user.phoneNumber
+    //sendSms( userPhoneNumber,'Your Loan Application has been submitted Succesfully')
     res.status(201).json({ message: "Loan applied successfully", savedLoan });
 
   } catch (err) {
