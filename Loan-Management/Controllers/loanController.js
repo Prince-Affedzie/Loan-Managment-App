@@ -66,9 +66,7 @@ const approveLoan = async (req, res) => {
       return res.status(400).json({ message: "Loan not found" });
     }
     
-    res
-      .status(200)
-      .json({ message: "Loan approved successfully" });
+    res.status(200).json({ message: "Loan approved successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
@@ -89,9 +87,7 @@ const rejectLoan = async (req, res) => {
     loan.approvedBy = req.user._id;
     loan.approvedDate = Date.now();
     const updatedLoan = await loan.save();
-    res
-      .status(200)
-      .json({ message: "Loan rejected successfully", updatedLoan });
+    res.status(200).json({ message: "Loan rejected successfully", updatedLoan });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
