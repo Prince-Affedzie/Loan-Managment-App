@@ -42,7 +42,8 @@ const loanSchema = new Schema({
   },
   approvedDate:{
     type:Date,
-    default:Date.now
+    default: Date.now()
+   
   },
   repaymentSchedule:{
     type:Schema.Types.ObjectId,
