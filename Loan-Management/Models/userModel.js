@@ -66,7 +66,8 @@ const userSchema = new Schema({
   },
   loan:[{
     type:Schema.Types.ObjectId,
-    ref:'Loan'
+    ref:'Loan',
+    default:[]
   }]
 });
 
