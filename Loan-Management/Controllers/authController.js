@@ -18,7 +18,7 @@ const loginUser = async(req,res)=>{
     return res.status(400).json({message:'Invalid email or password'})
   }
     req.user = user
-    const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
+    const token = jwt.sign({id:user._id,phoneNumber:user.phoneNumber},process.env.JWT_SECRET);
     res.cookie('token',token,{httpOnly:true,secure:true,sameSite:'none', maxAge: 3600000})
     console.log('Cookie set. Response headers:', res.getHeaders());
     console.log(user,token)

@@ -3,6 +3,7 @@ const Loan = require("../Models/loanModel");
 const Repayment = require("../Models/repaymentModel");
 const User = require("../Models/userModel");
 const jwt = require('jsonwebtoken')
+const sendSMS = require('../MiddleWares/sms')
 //const sendSms = require('../MiddleWares/smsService')
 
 
@@ -46,6 +47,7 @@ const applyForLoan = async (req, res) => {
     const savedLoan = await loan.save();
     //const userPhoneNumber = req.user.phoneNumber
     //sendSms( userPhoneNumber,'Your Loan Application has been submitted Succesfully')
+    sendSMS(req.user.phoneNumber,"Hello your application for loan to Prostec Loans was successful")
     res.status(201).json({ message: "Loan applied successfully", savedLoan });
 
   } catch (err) {

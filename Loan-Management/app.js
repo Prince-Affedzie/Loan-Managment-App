@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const CookieParser = require('cookie-parser')
 const path = require('path')
 const cors = require('cors')
+const africastalking = require('africastalking')
 const authRoutes = require('./Routes/authRoutes');
 const adminRoutes = require('./Routes/adminRoutes')
 const loanRoutes = require('./Routes/loanRoutes')
@@ -37,3 +38,14 @@ app.use('/api/loan', loanRoutes)
 app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname,'Loan-Managment-frontend/build', 'index.html'))
 })
+
+const credentials = {
+  apiKey: 'atsk_d2b03e3411190601b8b6144459a427bc9d6c4e680f8d7dbeb6d5d0c7285f17cf27038164',      // Replace with your Africa's Talking API key
+  username: 'sandbox'    // Use 'sandbox' if you're in development mode
+};
+
+// Initialize the SDK with your credentials
+const at = africastalking(credentials);
+
+// Get the SMS service
+const sms = at.SMS;
