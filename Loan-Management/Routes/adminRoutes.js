@@ -24,7 +24,7 @@ adminRoutes.post("/login", loginAdmin);
 adminRoutes.post("/addUser",adminAccesAuth,addUser)
 adminRoutes.post("/updateLoan", adminAccesAuth, updateLoan);
 adminRoutes.put("/approveLoan", adminAccesAuth, approveLoan);
-adminRoutes.put("/rejectLoan",userAccessAuth , rejectLoan);
+adminRoutes.put("/rejectLoan",adminAccesAuth , rejectLoan);
 adminRoutes.get("/getBorrowerLoans", adminAccesAuth, getBorrowerLoans);
 adminRoutes.get("/getApprovedLoans", ApprovedLoans);
 adminRoutes.get("/pendingLoans",  pendingLoans);

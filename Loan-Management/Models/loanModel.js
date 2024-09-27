@@ -37,7 +37,7 @@ const loanSchema = new Schema({
     default:'pending'
   },
   approvedBy:{
-    type:Schema.Types.ObjectId,
+    type:String,
     ref:'User'
   },
   approvedDate:{
