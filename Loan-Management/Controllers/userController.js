@@ -125,8 +125,8 @@ const addUser = async(req,res)=>{
      const user = await User.findById(userId).populate({
       path:'loan',
       select: 'loanNumber borrower balance dueDate',
-         populate:{
-          path:'repaymentSchedule'
+      populate:{
+        path:'repaymentSchedule'
          }
     })
     console.log(user)
