@@ -129,6 +129,7 @@ const addUser = async(req,res)=>{
           path:'repaymentSchedule'
          }
     })
+    console.log(user)
     res.status(200).json(user)
   
   
