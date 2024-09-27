@@ -34,7 +34,7 @@ const applyForLoan = async (req, res) => {
       return res.status(400).json({ message: "Please provide all the fields" });
     }
     const borrower = req.user.id;
-    const user = User.findById(borrower).populate('loan')
+    const user = User.findById(borrower)
     const loan = new Loan({
       borrower,
       loanAmount,
@@ -47,6 +47,9 @@ const applyForLoan = async (req, res) => {
     });
     const savedLoan = await loan.save();
     console.log(user)
+    if (!user.loan) {
+      user.loan = [];
+    }
     user.loan.push(savedLoan)
     await user.save();
     //const userPhoneNumber = req.user.phoneNumber
