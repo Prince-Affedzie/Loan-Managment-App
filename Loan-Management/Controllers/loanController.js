@@ -46,6 +46,7 @@ const applyForLoan = async (req, res) => {
     });
     const savedLoan = await loan.save();
     const user = User.findById(borrower).populate('loan')
+    console.log(user)
     user.loan.push(savedLoan)
     //const userPhoneNumber = req.user.phoneNumber
     //sendSms( userPhoneNumber,'Your Loan Application has been submitted Succesfully')
