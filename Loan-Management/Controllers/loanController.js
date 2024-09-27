@@ -34,7 +34,7 @@ const applyForLoan = async (req, res) => {
       return res.status(400).json({ message: "Please provide all the fields" });
     }
     const borrower = req.user.id;
-    const user = User.findById(borrower)
+    const user = await User.findById(borrower)
     const loan = new Loan({
       borrower,
       loanAmount,
