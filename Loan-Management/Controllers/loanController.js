@@ -45,7 +45,8 @@ const applyForLoan = async (req, res) => {
       purpose
     });
     const savedLoan = await loan.save();
-    await User.findByIdAndUpdate(borrower,{loan:[...loan,savedLoan]})
+    const user = User.findById(borrower)
+    user.loan.push(savedLoan)
     //const userPhoneNumber = req.user.phoneNumber
     //sendSms( userPhoneNumber,'Your Loan Application has been submitted Succesfully')
     sendSMS(req.user.phoneNumber,"Hello your application for loan to Prostec Loans was successful")
