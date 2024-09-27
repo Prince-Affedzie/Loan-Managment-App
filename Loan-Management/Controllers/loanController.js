@@ -237,7 +237,7 @@ const userGetRejectedLoans = async (req, res) => {
 //When admin wants to view all approved loans
 const ApprovedLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "approved" }).populate('borrower').sort({' approvedDate':-1});
+    const loans = await Loan.find({ status: "approved" }).populate('borrower').sort(' approvedDate');
     res.status(200).json( loans );
   } catch (err) {
     console.log(err);
@@ -257,7 +257,7 @@ const pendingLoans = async (req, res) => {
 // rejected loans view for admins only
 const rejectedLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "rejected" }).populate('borrower');
+    const loans = await Loan.find({ status: "rejected" }).populate('borrower').sort(' approvedDate');
     if (!loans) {
       return res.status(400).json({ message: "No Rejected loans found" });
     }
