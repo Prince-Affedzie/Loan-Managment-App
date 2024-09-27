@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Duplex } = require('stream');
 const Schema = mongoose.Schema;
-const loanSchema = new Schema({
+const loanSchema = new Schema([{
   borrower:{
    type:Schema.Types.ObjectId,
     ref:'User'
@@ -59,7 +59,7 @@ const loanSchema = new Schema({
     default:Date.now
   }
     
-})
+}])
 
 const Loan = mongoose.model('Loan', loanSchema);
 module.exports = Loan;
