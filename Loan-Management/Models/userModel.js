@@ -64,10 +64,10 @@ const userSchema = new Schema({
     default:'user',
     required:true
   },
-  loan:{
+  loan:[{
     type:Schema.Types.ObjectId,
     ref:'Loan'
-  }
+  }]
 });
 
 const User = mongoose.model('User', userSchema);
