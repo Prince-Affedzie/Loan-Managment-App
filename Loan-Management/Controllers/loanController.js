@@ -63,7 +63,7 @@ const approveLoan = async (req, res) => {
     if (!loanId) {
       return res.status(400).json({ message: "Please no loan found " });
     }
-    const loan = await Loan.findByIdAndUpdate(loanId,{status});
+    const loan = await Loan.findByIdAndUpdate(loanId,{status,approvedBy:req.user.name,approvedDate:Date.now()});
     if (!loan) {
       return res.status(400).json({ message: "Loan not found" });
     }
@@ -86,7 +86,7 @@ const rejectLoan = async (req, res) => {
       return res.status(400).json({ message: "Loan already rejected" });
     }
     loan.status = status;
-    loan.approvedBy = req.user._id;
+    loan.approvedBy = req.user.name;
     loan.approvedDate = Date.now();
     const updatedLoan = await loan.save();
     res.status(200).json({ message: "Loan rejected successfully", updatedLoan });
