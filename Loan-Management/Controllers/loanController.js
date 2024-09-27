@@ -34,6 +34,7 @@ const applyForLoan = async (req, res) => {
       return res.status(400).json({ message: "Please provide all the fields" });
     }
     const borrower = req.user.id;
+    const user = User.findById(borrower).populate('loan')
     const loan = new Loan({
       borrower,
       loanAmount,
@@ -45,9 +46,9 @@ const applyForLoan = async (req, res) => {
       purpose
     });
     const savedLoan = await loan.save();
-    const user = User.findById(borrower).populate('loan')
     console.log(user)
     user.loan.push(savedLoan)
+    await user.save();
     //const userPhoneNumber = req.user.phoneNumber
     //sendSms( userPhoneNumber,'Your Loan Application has been submitted Succesfully')
     sendSMS(req.user.phoneNumber,"Hello your application for loan to Prostec Loans was successful")
