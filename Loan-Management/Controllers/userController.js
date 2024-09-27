@@ -1,5 +1,6 @@
 const User = require('../Models/userModel')
 const Loan = require('../Models/loanModel')
+const Repayment = require('../Models/repaymentModel')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 
@@ -124,14 +125,11 @@ const addUser = async(req,res)=>{
     try{
      const user = await User.findById(userId).populate({
       path:'loan',
-      select: 'loanNumber borrower balance dueDate',
       populate:{
-        path:'repaymentSchedule'
-         }
-    })
-    console.log(user)
-    res.status(200).json(user)
-  
+        path : 'repaymentSchedule'
+      }
+     })
+     res.status(200).json(user)
   
     }catch(err){
       res.status(500).send('Internal server Error')
