@@ -7,8 +7,7 @@ const sendSMS = require('../MiddleWares/sms')
 //const sendSms = require('../MiddleWares/smsSer
 
 
-const page = parseInt(req.query.page) || 1; // Default to page 1
-const limit = parseInt(req.query.limit) || 10; // Default to 10 documents per page
+
 
 const dashboard = async(req,res)=>{
   
