@@ -14,9 +14,10 @@ const {
        repaidLoans,
        getTotalAmountOnLoan,
        repaymentsMade,
-       archieveLoan,
-       UnarchieveLoan,
+       archiveLoan,
+       UnarchiveLoan,
        deleteLoan,
+       ViewarchiveLoans
       
       
 } = require("../Controllers/loanController");
@@ -26,22 +27,23 @@ adminRoutes.post("/login", loginAdmin);
 adminRoutes.post("/addUser",adminAccesAuth,addUser)
 adminRoutes.post("/updateLoan", adminAccesAuth, updateLoan);
 adminRoutes.put("/approveLoan", adminAccesAuth, approveLoan);
-adminRoutes.put("/archieveLoan", adminAccesAuth, archieveLoan);
-adminRoutes.put("/unarchieveLoan", adminAccesAuth,  UnarchieveLoan);
+adminRoutes.put("/archiveLoan", adminAccesAuth, archiveLoan);
+adminRoutes.put("/unarchiveLoan", adminAccesAuth,  UnarchiveLoan);
 adminRoutes.put("/rejectLoan",adminAccesAuth , rejectLoan);
 adminRoutes.get("/getBorrowerLoans", adminAccesAuth, getBorrowerLoans);
-adminRoutes.get("/getApprovedLoans", ApprovedLoans);
-adminRoutes.get("/pendingLoans",  pendingLoans);
-adminRoutes.get("/rejectedLoans",  rejectedLoans);
-adminRoutes.get("/getUsers",  getUsers);
-adminRoutes.get("/userDetails/:userId", userDetails);
-adminRoutes.post("/removeUser", removeUser);
+adminRoutes.get("/getApprovedLoans",adminAccesAuth, ApprovedLoans);
+adminRoutes.get("/getArchiveLoans", adminAccesAuth, ViewarchiveLoans);
+adminRoutes.get("/pendingLoans", adminAccesAuth, pendingLoans);
+adminRoutes.get("/rejectedLoans", adminAccesAuth, rejectedLoans);
+adminRoutes.get("/getUsers", adminAccesAuth, getUsers);
+adminRoutes.get("/userDetails/:userId", adminAccesAuth,userDetails);
+adminRoutes.post("/removeUser",adminAccesAuth, removeUser);
 adminRoutes.get("/repaidLoans", adminAccesAuth, repaidLoans);
 adminRoutes.get("/total/loansgivenout", adminAccesAuth, getTotalAmountOnLoan);
-adminRoutes.get('/repayments', repaymentsMade)
-adminRoutes.get('/updateUser/:userId',updateUser)
-adminRoutes.put('/updateUser/:userId',updateUserInfo)
-adminRoutes.delete('/deleteLoan',deleteLoan)
+adminRoutes.get('/repayments', adminAccesAuth,repaymentsMade)
+adminRoutes.get('/updateUser/:userId',adminAccesAuth,updateUser)
+adminRoutes.put('/updateUser/:userId',adminAccesAuth,updateUserInfo)
+adminRoutes.delete('/deleteLoan',adminAccesAuth,deleteLoan)
 
 
 module.exports = adminRoutes;

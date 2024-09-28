@@ -283,7 +283,7 @@ const repaidLoans = async (req, res) => {
     if (!loans) {
       return res.statu(400).json({ message: "No repaid loans found" });
     }
-    console.log(loans);
+   
     res.status(200).json(loans);
   } catch (err) {
     console.log(err);
@@ -414,7 +414,7 @@ const deleteLoan = async(req,res)=>{
   }
 };
 
-const archieveLoan = async (req, res) => {
+const archiveLoan = async (req, res) => {
   
   try {
     const {loanId} = req.body;
@@ -433,7 +433,7 @@ const archieveLoan = async (req, res) => {
   }
 };
 
-const UnarchieveLoan = async (req, res) => {
+const UnarchiveLoan = async (req, res) => {
   
   try {
     const {loanId} = req.body;
@@ -446,6 +446,21 @@ const UnarchieveLoan = async (req, res) => {
     }
     
     res.status(200).json({ message: "Loan Unarchieved successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const ViewarchiveLoans = async (req, res) => {
+  
+ try{
+    const loan = await Loan.find({isArchived:true});
+    if (!loan) {
+      return res.status(400).json({ message: "Loan not found" });
+    }
+    
+    res.status(200).json(loan);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
@@ -475,7 +490,8 @@ module.exports = {
   repaymentsMade,
   getUserRepayments,
   deleteLoan,
-  archieveLoan,
-  UnarchieveLoan
+  archiveLoan,
+  UnarchiveLoan,
+  ViewarchiveLoans
  
 };
