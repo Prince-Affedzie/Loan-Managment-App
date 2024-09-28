@@ -411,8 +411,45 @@ const deleteLoan = async(req,res)=>{
     console.log(err)
     res.status(500).send('Internal Server Error')
   }
-}
+};
 
+const archieveLoan = async (req, res) => {
+  
+  try {
+    const {loanId} = req.body;
+    if (!loanId) {
+      return res.status(400).json({ message: "Please no loan found " });
+    }
+    const loan = await Loan.findByIdAndUpdate(loanId,{isArchived:true});
+    if (!loan) {
+      return res.status(400).json({ message: "Loan not found" });
+    }
+    
+    res.status(200).json({ message: "Loan archieved successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const UnarchieveLoan = async (req, res) => {
+  
+  try {
+    const {loanId} = req.body;
+    if (!loanId) {
+      return res.status(400).json({ message: "Please no loan found " });
+    }
+    const loan = await Loan.findByIdAndUpdate(loanId,{isArchived:false});
+    if (!loan) {
+      return res.status(400).json({ message: "Loan not found" });
+    }
+    
+    res.status(200).json({ message: "Loan Unarchieved successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 
 module.exports = {
@@ -437,5 +474,7 @@ module.exports = {
   repaymentsMade,
   getUserRepayments,
   deleteLoan,
+  archieveLoan,
+  UnarchieveLoan
  
 };

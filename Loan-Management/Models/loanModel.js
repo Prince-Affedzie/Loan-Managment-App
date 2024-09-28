@@ -54,6 +54,10 @@ const loanSchema = new Schema({
     type:Number,
     
   },
+  isArchived:{ 
+    type: Boolean,
+     default: false 
+    },
   createdDate:{
     type:Date,
     default:Date.now

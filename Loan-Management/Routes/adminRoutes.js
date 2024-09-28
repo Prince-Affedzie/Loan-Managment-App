@@ -14,6 +14,8 @@ const {
        repaidLoans,
        getTotalAmountOnLoan,
        repaymentsMade,
+       archieveLoan,
+       UnarchieveLoan,
        deleteLoan,
       
       
@@ -24,6 +26,8 @@ adminRoutes.post("/login", loginAdmin);
 adminRoutes.post("/addUser",adminAccesAuth,addUser)
 adminRoutes.post("/updateLoan", adminAccesAuth, updateLoan);
 adminRoutes.put("/approveLoan", adminAccesAuth, approveLoan);
+adminRoutes.put("/archieveLoan", adminAccesAuth, archieveLoan);
+adminRoutes.put("/unarchieveLoan", adminAccesAuth,  UnarchieveLoan);
 adminRoutes.put("/rejectLoan",adminAccesAuth , rejectLoan);
 adminRoutes.get("/getBorrowerLoans", adminAccesAuth, getBorrowerLoans);
 adminRoutes.get("/getApprovedLoans", ApprovedLoans);
