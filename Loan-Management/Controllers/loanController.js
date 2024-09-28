@@ -35,6 +35,8 @@ const applyForLoan = async (req, res) => {
     }
     const borrower = req.user.id;
     const user = await User.findById(borrower)
+    
+    const balance = (parseFloat(loanAmount)* (parseFloat(interestRate)/100)*parseInt(durationMonths))+parseFloat(loanAmount)
     const loan = new Loan({
       borrower,
       loanAmount,
@@ -42,7 +44,7 @@ const applyForLoan = async (req, res) => {
       durationMonths,
       startPaymentDate,
       dueDate,
-      balance:(loanAmount* (interestRate/100)*durationMonths)+durationMonths,
+      balance:balance,
       purpose
     });
     const savedLoan = await loan.save();
