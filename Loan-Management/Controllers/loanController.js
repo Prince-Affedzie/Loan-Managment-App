@@ -7,6 +7,9 @@ const sendSMS = require('../MiddleWares/sms')
 //const sendSms = require('../MiddleWares/smsSer
 
 
+const page = parseInt(req.query.page) || 1; // Default to page 1
+const limit = parseInt(req.query.limit) || 10; // Default to 10 documents per page
+
 const dashboard = async(req,res)=>{
   
   try{
@@ -246,7 +249,8 @@ const userGetRejectedLoans = async (req, res) => {
 //When admin wants to view all approved loans
 const ApprovedLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "approved" }).populate('borrower').sort({' approvedDate':-1});
+    const loans = await Loan.find({ status: "approved" }).populate('borrower').skip((1 - 1) * 10)
+    .limit(10).sort({' approvedDate':-1});
     res.status(200).json( loans );
   } catch (err) {
     console.log(err);
@@ -256,7 +260,8 @@ const ApprovedLoans = async (req, res) => {
 // pending loans view for admins only
 const pendingLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "pending" }).populate('borrower').sort({'createdDate':-1});
+    const loans = await Loan.find({ status: "pending" }).populate('borrower').skip((1 - 1) * 10)
+    .limit(10).sort({'createdDate':-1});
     res.status(200).json(loans);
   } catch (err) {
     console.log(err);
@@ -266,7 +271,8 @@ const pendingLoans = async (req, res) => {
 // rejected loans view for admins only
 const rejectedLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "rejected" }).populate('borrower').sort({' approvedDate':-1});
+    const loans = await Loan.find({ status: "rejected" }).populate('borrower').skip((1 - 1) * 10)
+    .limit(10).sort({' approvedDate':-1});
     if (!loans) {
       return res.status(400).json({ message: "No Rejected loans found" });
     }
@@ -301,7 +307,8 @@ const repaymentsMade = async(req,res)=>{
       path: 'borrower', // This assumes borrower is a reference to the User model
       select: 'name' // Specify the fields you want to return from the User model
     }
-  }).sort({'paymentDate':-1}) 
+  }).skip((1 - 1) * 10)
+  .limit(10).sort({'paymentDate':-1}) 
   
  
   if(!repayments){
