@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt')
 //for Admin Use Only
 const getUsers = async(req,res)=>{
     try{
-        const users = await User.find().skip((1 - 1) * 10)
+        const users = await User.find().skip((1) * 10)
         .limit(10).sort('name')
         if(!users){
             return res.status(200).send('No users Found')
