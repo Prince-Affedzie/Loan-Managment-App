@@ -42,7 +42,7 @@ adminRoutes.get("/repaidLoans", adminAccesAuth, repaidLoans);
 adminRoutes.get("/total/loansgivenout", adminAccesAuth, getTotalAmountOnLoan);
 adminRoutes.get('/repayments', adminAccesAuth,repaymentsMade)
 adminRoutes.get('/updateUser/:userId',adminAccesAuth,updateUser)
-adminRoutes.put('/updateUser/:userId',adminAccesAuth,updateUserInfo)
+adminRoutes.put('/updateUser/:userId',updateUserInfo)
 adminRoutes.delete('/deleteLoan',adminAccesAuth,deleteLoan)
 
 
