@@ -277,13 +277,13 @@ const rejectedLoans = async (req, res) => {
 // When an admin wants to see all paid loans in the system
 const repaidLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "paid" })
+    const loans = await Loan.find({ status: "fully paid" })
       .populate("borrower")
       .populate("repaymentSchedule");
     if (!loans) {
       return res.statu(400).json({ message: "No repaid loans found" });
     }
-    res.status(200).json({ message: "All repaid loans", loans });
+    res.status(200).json(loans);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
