@@ -277,7 +277,7 @@ const rejectedLoans = async (req, res) => {
 // When an admin wants to see all paid loans in the system
 const repaidLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "fully paid",isArchived:false })
+    const loans = await Loan.find({ status: "fully paid",isArchived: false })
       .populate("borrower")
       .populate("repaymentSchedule");
     if (!loans) {
