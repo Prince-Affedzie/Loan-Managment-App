@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CookieParser = require('cookie-parser')
+const User = require('./Models/userModel')
 const path = require('path')
 const cors = require('cors')
 
@@ -28,7 +29,21 @@ app.use(express.static(path.join(__dirname, 'Loan-Management-frontend/build')));
 mongoose.connect(process.env.MONGO_URI)
    .then(()=>app.listen(port, () => console.log(`Server is running on port ${port}`)))
    .catch((err) => console.log(err));
- 
+
+   const runMigrations = async () => {
+    try {
+      await User.updateMany(
+        { loan: { $exists:false } }, // Only update documents where "isArchived" doesn't exist
+        { $set: { loan: [] } }     // Set "isArchived" to false
+      );
+      console.log('All users without isArchived field updated.');
+    } catch (err) {
+      console.error('Error during migration:', err);
+    }
+  };
+  
+  // Call the migration function during startup
+  runMigrations();
    
 app.get('/', (req, res) => {
   res.send('Hello World!')
