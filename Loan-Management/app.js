@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CookieParser = require('cookie-parser')
-const Loans = require('./Models/loanModel')
 const path = require('path')
 const cors = require('cors')
 
@@ -30,20 +29,7 @@ mongoose.connect(process.env.MONGO_URI)
    .then(()=>app.listen(port, () => console.log(`Server is running on port ${port}`)))
    .catch((err) => console.log(err));
  
-   const runMigrations = async () => {
-    try {
-      await Loans.updateMany(
-        {}, 
-        { $set: { isArchived: false } }
-      );
-      console.log('All users updated with default verification status');
-    } catch (err) {
-      console.error('Error during migration:', err);
-    }
-  };
-  
-  // Call the migration function during startup
-  runMigrations();
+   
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
