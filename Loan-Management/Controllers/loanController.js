@@ -42,7 +42,7 @@ const applyForLoan = async (req, res) => {
       durationMonths,
       startPaymentDate,
       dueDate,
-      balance:loanAmount,
+      balance:(loanAmount* interestRate*durationMonths)+durationMonths,
       purpose
     });
     const savedLoan = await loan.save();
