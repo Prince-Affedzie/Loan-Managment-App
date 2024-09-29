@@ -337,7 +337,7 @@ const getUserRepayments = async (req, res) => {
     // Find repayments related to the user's loans
     const repayments = await Repayment.find({ loanId: { $in: loanIds } }).populate({
       path: 'loanId',
-      select: 'loanNumber borrower balance dueDate', // Fetch loanNumber and borrower from the Loan model
+      select: 'loanNumber borrower balance status dueDate', // Fetch loanNumber and borrower from the Loan model
       populate: {
         path: 'borrower', // Populate borrower details (assuming it's a reference to the User model)
         select: 'name email', // Select specific fields from the User model
