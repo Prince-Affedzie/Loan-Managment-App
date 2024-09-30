@@ -20,6 +20,10 @@ const repaymentSchema = new Schema({
      type:String,
      required:true
   },
+  transactionId:{
+       type: String,
+       required:false
+  },
   dueDate:{
     type:Date,
     required:false

@@ -318,11 +318,22 @@ const repaymentsMade = async(req,res)=>{
 
 }
 
-const approveRepayment= async(req,res)=>{
+const approveRepayment = async(req,res)=>{
     const {repaymentId,status} = req.body
     try{
     await Repayment.findByIdAndUpdate(repaymentId,{status:status})
     res.status(200).json({message: "Repayment Status Updated Successfully"})
+    }catch(err){
+      console.log(err)
+      res.status(500).send('Internal server error')
+    }
+}
+
+const updateRepayment = async(req,res)=>{
+    const {repaymentId,transactionId} = req.body
+    try{
+      await Repayment.findByIdAndUpdate(repaymentId,{transactionId:transactionId})
+      res.status(200).json({message:"Repayment Updated Succesfully"})
     }catch(err){
       console.log(err)
       res.status(500).send('Internal server error')
@@ -526,6 +537,7 @@ module.exports = {
   UnarchiveLoan,
   ViewarchiveLoans,
   ViewUnarchiveLoans,
-  approveRepayment
+  approveRepayment,
+  updateRepayment
  
 };
