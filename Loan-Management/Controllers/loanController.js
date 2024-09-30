@@ -322,7 +322,7 @@ const approveRepayment= async(req,res)=>{
     const {repaymentId,status} = req.body
     try{
     await Repayment.findByIdAndUpdate(repaymentId,{status:status})
-    res.status(200).json({message: "Loan Status Updated Successfully"})
+    res.status(200).json({message: "Repayment Status Updated Successfully"})
     }catch(err){
       console.log(err)
       res.status(500).send('Internal server error')
