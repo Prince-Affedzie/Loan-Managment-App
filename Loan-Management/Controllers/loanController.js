@@ -124,7 +124,7 @@ const updateLoan = async (req, res) => {
 };
 
 const repayLoan = async (req, res) => {
-  const { loanId, amountPaid, paymentMethod, paymentDate } = req.body;
+  const { loanId, amountPaid, transactionId, paymentMethod, paymentDate } = req.body;
   let loan = await Loan.findById(loanId);
   if (amountPaid > loan.balance) {
     throw new Error('Repayment amount exceeds loan balance');
