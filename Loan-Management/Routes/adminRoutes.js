@@ -29,7 +29,7 @@ adminRoutes.post("/login", loginAdmin);
 adminRoutes.post("/addUser",adminAccesAuth,addUser)
 adminRoutes.post("/updateLoan", adminAccesAuth, updateLoan);
 adminRoutes.put("/approveLoan", adminAccesAuth, approveLoan);
-adminRoutes.put("/approveRepayment",adminAccesAuth,approveRepayment);
+adminRoutes.put("/approveRepayment",approveRepayment);
 adminRoutes.put("/archiveloan", adminAccesAuth, archiveLoan);
 adminRoutes.put("/unarchiveloan", adminAccesAuth,  UnarchiveLoan);
 adminRoutes.put("/rejectLoan",adminAccesAuth , rejectLoan);
