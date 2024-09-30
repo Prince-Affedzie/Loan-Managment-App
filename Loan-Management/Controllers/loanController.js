@@ -460,7 +460,8 @@ const UnarchiveLoan = async (req, res) => {
 const ViewarchiveLoans = async (req, res) => {
   
  try{
-    const loan = await Loan.find({isArchived:true,status:'fully paid'});
+    const loan = await Loan.find({isArchived:true,status:'fully paid'}).populate("borrower")
+    .populate("repaymentSchedule");;
     if (!loan) {
       return res.status(400).json({ message: "Loan not found" });
     }
@@ -475,7 +476,9 @@ const ViewarchiveLoans = async (req, res) => {
 const ViewUnarchiveLoans = async (req, res) => {
   
   try{
-     const loan = await Loan.find({isArchived:false,status:'fully paid'});
+     const loan = await Loan.find({isArchived:false,status:'fully paid'})
+     .populate("borrower")
+     .populate("repaymentSchedule");;
      if (!loan) {
        return res.status(400).json({ message: "Loan not found" });
      }
