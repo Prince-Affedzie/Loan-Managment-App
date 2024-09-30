@@ -281,7 +281,7 @@ const rejectedLoans = async (req, res) => {
 // When an admin wants to see all paid loans in the system
 const repaidLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ status: "fully paid"})
+    const loans = await Loan.find({ status: "fully paid", isArchived:false})
       .populate("borrower")
       .populate("repaymentSchedule");
     if (!loans) {
@@ -305,8 +305,6 @@ const repaymentsMade = async(req,res)=>{
     }
   }).skip((1 - 1) * 10)
   .limit(10).sort({'paymentDate':-1}) 
-  
- 
   if(!repayments){
     return res.status(200).json({message:'No repayments found'})
 
@@ -318,6 +316,17 @@ const repaymentsMade = async(req,res)=>{
     console.log(err)
   }
 
+}
+
+const approveRepayment= async(req,res)=>{
+    const {repaymentId,status} = req.body
+    try{
+    await Repayment.findByIdAndUpdate(repaymentId,{status:status})
+    res.status(200).json({message: "Loan Status Updated Successfully"})
+    }catch(err){
+      console.log(err)
+      res.status(500).send('Internal server error')
+    }
 }
 // users can view all repayments, they,ve done
 const getUserRepayments = async (req, res) => {
@@ -516,6 +525,7 @@ module.exports = {
   archiveLoan,
   UnarchiveLoan,
   ViewarchiveLoans,
-  ViewUnarchiveLoans
+  ViewUnarchiveLoans,
+  approveRepayment
  
 };

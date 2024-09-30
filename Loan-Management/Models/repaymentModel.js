@@ -26,7 +26,7 @@ const repaymentSchema = new Schema({
   },
   status:{
     type:String,
-    enum:['pending','paid'],
+    enum:['pending','approved'],
     default:'pending'
   }
 })
