@@ -136,6 +136,7 @@ const repayLoan = async (req, res) => {
       amountPaid,
       paymentDate,
       paymentMethod,
+      transactionId:transactionId
     });
 
     // Save the repayment record
