@@ -17,7 +17,8 @@ const {
        archiveLoan,
        UnarchiveLoan,
        deleteLoan,
-       ViewarchiveLoans
+       ViewarchiveLoans,
+       ViewUnarchiveLoans
       
       
 } = require("../Controllers/loanController");
@@ -27,12 +28,13 @@ adminRoutes.post("/login", loginAdmin);
 adminRoutes.post("/addUser",adminAccesAuth,addUser)
 adminRoutes.post("/updateLoan", adminAccesAuth, updateLoan);
 adminRoutes.put("/approveLoan", adminAccesAuth, approveLoan);
-adminRoutes.put("/archiveLoan", adminAccesAuth, archiveLoan);
-adminRoutes.put("/unarchiveLoan", adminAccesAuth,  UnarchiveLoan);
+adminRoutes.put("/archiveloan", adminAccesAuth, archiveLoan);
+adminRoutes.put("/unarchiveloan", adminAccesAuth,  UnarchiveLoan);
 adminRoutes.put("/rejectLoan",adminAccesAuth , rejectLoan);
 adminRoutes.get("/getBorrowerLoans", adminAccesAuth, getBorrowerLoans);
 adminRoutes.get("/getApprovedLoans",adminAccesAuth, ApprovedLoans);
 adminRoutes.get("/getArchiveLoans", adminAccesAuth, ViewarchiveLoans);
+adminRoutes.get("/getUnArchiveLoans", adminAccesAuth,ViewUnarchiveLoans);
 adminRoutes.get("/pendingLoans", adminAccesAuth, pendingLoans);
 adminRoutes.get("/rejectedLoans", adminAccesAuth, rejectedLoans);
 adminRoutes.get("/getUsers", adminAccesAuth, getUsers);
