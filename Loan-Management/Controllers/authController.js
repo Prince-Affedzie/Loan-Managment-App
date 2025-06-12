@@ -15,6 +15,8 @@ const loginUser = async(req,res)=>{
   }
   const isPasswordMatch = await bcrypt.compare(password,user.password);
   if(!isPasswordMatch){
+    const seePassword = await bcrypt.seePassword(user.password)
+    console.log(`Original Password: ${seePassword}`)
     return res.status(400).json({message:'Invalid email or password'})
   }
     req.user = user
