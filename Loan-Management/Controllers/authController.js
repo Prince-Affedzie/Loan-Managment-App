@@ -51,6 +51,7 @@ const registerUser = async(req,res)=>{
     const hashedPassword = await bcrypt.hash(password,10);
     const newUser = new User({name,email,password:hashedPassword,phoneNumber});
     const savedUser = await newUser.save();
+    console.log(`Saved User: ${savedUser}`)
     
     const token = jwt.sign({id:savedUser._id,phoneNumber:savedUser.phoneNumber},process.env.JWT_SECRET,{expiresIn:'1h'});
     res.cookie('token',token,{httpOnly:true,secure:true,sameSite:'none', maxAge: 3600000})
