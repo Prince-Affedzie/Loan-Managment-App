@@ -5,6 +5,7 @@ const validator = require('validator');
 // for borrowers
 const loginUser = async(req,res)=>{
   try{
+    console.log('Exceuting')
   const {email,password} = req.body;
   if(!email || !password){
     return res.status(400).json({message:'Please provide email and password'})
@@ -34,6 +35,7 @@ const loginUser = async(req,res)=>{
 // for borrowers
 const registerUser = async(req,res)=>{
   try{
+    console.log('Exceuting')
     const {name,email,password,phoneNumber} = req.body;
     if(!name || !email || !password || !phoneNumber){
       return res.status(400).json({message:'Please provide all the fields'})
